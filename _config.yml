@@ -7,3 +7,6 @@ theme: jekyll-theme-cayman
 github_username: mlele7582-code
 
 show_excerpts: true
+
+sass:
+    style: compressed
