@@ -14,10 +14,6 @@ layout: default
   }
 </style>
 
-# <span style="color: #d6336c;">马乐乐的项目记录</span>
-
-记录从零开始的每一个项目
-
 👋 你好！我是 [马乐乐](/about/)，这里记录了我从零开始的每一个项目。
 
 ## 我的项目
