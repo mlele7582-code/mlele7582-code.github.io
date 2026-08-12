@@ -4,18 +4,6 @@ title: 项目总结：make-knowledge-cards
 permalink: /projects/make-knowledge-cards/
 ---
 
-<style>
-  .page-header {
-    background: linear-gradient(120deg, #ffe4ec, #ffb6c1) !important;
-  }
-  .page-header .project-name {
-    color: #d6336c !important;
-  }
-  .page-header .project-tagline {
-    color: #ffe4ec !important;
-  }
-</style>
-
 # 项目总结：make-knowledge-cards
 
 ## 项目概述

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,73 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <p>{{ site.description }}</p>
-    </div>
-  </header>
-  <main>
-    <div class="container">
+  <!-- 动态漂浮模糊球体 -->
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+
+  <div class="page-wrapper">
+    <header class="glass">
+      <p class="header-tagline">{{ site.description }}</p>
+    </header>
+
+    <main class="glass">
       {{ content }}
-    </div>
-  </main>
+    </main>
+
+    <footer class="glass footer-small">
+      <p>© {{ site.time | date: '%Y' }} {{ site.author }} · Powered by 💗</p>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var orbs = document.querySelectorAll('.orb');
+      var targets = [];
+
+      function newTarget() {
+        return {
+          x: Math.random() * (window.innerWidth - 200) - 100,
+          y: Math.random() * (window.innerHeight - 200) - 100
+        };
+      }
+
+      orbs.forEach(function(orb, i) {
+        var t = newTarget();
+        targets.push({ x: t.x, y: t.y, tx: t.x, ty: t.y });
+        orb.style.transform = 'translate(' + t.x + 'px, ' + t.y + 'px)';
+      });
+
+      function animate() {
+        for (var i = 0; i < orbs.length; i++) {
+          var t = targets[i];
+          var dx = t.tx - t.x;
+          var dy = t.ty - t.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 60) {
+            var nt = newTarget();
+            t.tx = nt.x;
+            t.ty = nt.y;
+          }
+
+          t.x += (t.tx - t.x) * 0.002;
+          t.y += (t.ty - t.y) * 0.002;
+
+          orbs[i].style.transform = 'translate(' + t.x + 'px, ' + t.y + 'px)';
+        }
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      window.addEventListener('resize', function() {
+        for (var i = 0; i < orbs.length; i++) {
+          var nt = newTarget();
+          targets[i].tx = nt.x;
+          targets[i].ty = nt.y;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -2,22 +2,10 @@
 layout: default
 ---
 
-<style>
-  .page-header {
-    background: linear-gradient(120deg, #ffe4ec, #ffb6c1) !important;
-  }
-  .page-header .project-name {
-    color: #d6336c !important;
-  }
-  .page-header .project-tagline {
-    color: #ffe4ec !important;
-  }
-</style>
-
-# [<span style="color: #d6336c;">马乐乐的项目记录</span>](/about/)
+# [<span style="color: #ff85a2;">马乐乐的项目记录</span>](/about/)
 
 👋 你好！我是 [马乐乐](/about/)，这里记录了我从零开始的每一个项目。
 
 ## 我的项目
 
-- 📚 [make-knowledge-cards](https://github.com/mlele7582-code/make-knowledge-cards) — 知识卡片生成工具 <a href="/projects/make-knowledge-cards/" style="color: #d6336c; text-decoration: none;" title="查看项目总结">💗</a>
+- 📚 [make-knowledge-cards](https://github.com/mlele7582-code/make-knowledge-cards) — 知识卡片生成工具 <a href="/projects/make-knowledge-cards/" style="color: #ff85a2; text-decoration: none;" title="查看项目总结">💗</a>
