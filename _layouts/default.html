@@ -2,11 +2,132 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>{{ site.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <!-- 新增开始：移动端导航栏内联样式 -->
+  <style>
+    /* 桌面端隐藏 */
+    @media (min-width: 769px) {
+      .mobile-nav { display: none !important; }
+    }
+
+    /* 移动端导航栏 */
+    @media (max-width: 768px) {
+      /* 导航栏淡入动画 */
+      @keyframes mobileNavIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .mobile-nav {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        height: 56px;
+        /* 毛玻璃 — 与现有设计统一 */
+        background: rgba(30, 10, 50, 0.78);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        /* iPhone 安全区域 */
+        padding-top: env(safe-area-inset-top, 0px);
+        /* 淡入动画 */
+        animation: mobileNavIn 0.35s ease-out both;
+      }
+
+      .mobile-nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+        padding: 0 14px;
+      }
+
+      /* 左右区域最小宽度，保证三等分不塌陷 */
+      .mobile-nav-left,
+      .mobile-nav-right {
+        min-width: 68px;
+        display: flex;
+        align-items: center;
+      }
+      .mobile-nav-left  { justify-content: flex-start; }
+      .mobile-nav-right { justify-content: flex-end; }
+
+      /* 中间标题 */
+      .mobile-nav-title {
+        flex: 1;
+        text-align: center;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        padding: 0 4px;
+      }
+
+      /* 返回 & 首页按钮 */
+      .mobile-nav-back,
+      .mobile-nav-home {
+        color: #ff85a2;
+        font-size: 1rem;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 10px;
+        transition: background 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .mobile-nav-back:active,
+      .mobile-nav-home:active {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* 给 header 留出呼吸空间，避免被导航栏遮挡 */
+      header.glass {
+        margin-top: 8px;
+      }
+
+      /* 超小屏（320px及以下）：隐藏箭头文字 */
+      @media (max-width: 359px) {
+        .back-arrow-text { display: none; }
+        .mobile-nav-left,
+        .mobile-nav-right { min-width: 52px; }
+        .mobile-nav-back,
+        .mobile-nav-home { padding: 8px 10px; font-size: 0.95rem; }
+      }
+    }
+  </style>
+  <!-- 新增结束 -->
 </head>
 <body>
+  <!-- 新增开始：移动端返回导航栏 -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+    <div class="mobile-nav-inner">
+      <!-- 左侧：返回按钮，首页时隐藏 -->
+      <span class="mobile-nav-left">
+        {% if page.url != '/' and page.url != '/index.html' %}
+          <a href="javascript:void(0)"
+             class="mobile-nav-back"
+             id="backBtn"
+             aria-label="返回上一页">← <span class="back-arrow-text">返回</span></a>
+        {% endif %}
+      </span>
+      <!-- 中间：页面标题 -->
+      <span class="mobile-nav-title">{{ page.title | default: site.title }}</span>
+      <!-- 右侧：首页按钮 -->
+      <span class="mobile-nav-right">
+        <a href="/" class="mobile-nav-home" aria-label="回到首页" title="首页">🏠</a>
+      </span>
+    </div>
+  </nav>
+  <!-- 新增结束 -->
+
   <!-- 动态漂浮模糊球体 -->
   <div class="orb orb--1"></div>
   <div class="orb orb--2"></div>
@@ -73,6 +194,25 @@
           targets[i].ty = nt.y;
         }
       });
+
+      // 新增：智能返回按钮 — document.referrer 判断来源
+      var backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var ref = document.referrer;
+          try {
+            var refHost = new URL(ref).hostname;
+            if (refHost && refHost === location.hostname) {
+              history.back();   // 站内来源 → 正常返回
+            } else {
+              location.href = '/'; // 站外来源 → 跳转首页
+            }
+          } catch (ex) {
+            history.back(); // URL 解析失败 → 兜底
+          }
+        });
+      }
     })();
   </script>
 </body>

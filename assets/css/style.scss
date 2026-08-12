@@ -236,3 +236,95 @@ a:hover {
   .glass { padding: 1rem 0.9rem; border-radius: 12px; }
   .glass pre { padding: 0.8rem 1rem; }
 }
+
+/* ============================================
+   Mobile Navigation — 移动端返回导航栏
+   桌面端自动隐藏，移动端毛玻璃固定导航
+   ============================================ */
+
+/* 桌面端隐藏 */
+@media (min-width: 769px) {
+  .mobile-nav { display: none !important; }
+}
+
+/* 移动端显示 */
+@media (max-width: 768px) {
+  @keyframes mobileNavIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mobile-nav {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    height: 56px;
+    background: rgba(30, 10, 50, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: env(safe-area-inset-top, 0px);
+    animation: mobileNavIn 0.35s ease-out both;
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 14px;
+  }
+
+  .mobile-nav-left,
+  .mobile-nav-right {
+    min-width: 68px;
+    display: flex;
+    align-items: center;
+  }
+  .mobile-nav-left  { justify-content: flex-start; }
+  .mobile-nav-right { justify-content: flex-end; }
+
+  .mobile-nav-title {
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    padding: 0 4px;
+  }
+
+  .mobile-nav-back,
+  .mobile-nav-home {
+    color: #ff85a2;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .mobile-nav-back:active,
+  .mobile-nav-home:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  header.glass {
+    margin-top: 8px;
+  }
+
+  /* 超小屏：隐藏箭头文字 */
+  @media (max-width: 359px) {
+    .back-arrow-text { display: none; }
+    .mobile-nav-left,
+    .mobile-nav-right { min-width: 52px; }
+    .mobile-nav-back,
+    .mobile-nav-home { padding: 8px 10px; font-size: 0.95rem; }
+  }
+}
