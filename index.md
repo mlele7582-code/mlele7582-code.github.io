@@ -20,4 +20,4 @@ layout: default
 
 ## 我的项目
 
-- 📚 [make-knowledge-cards](https://github.com/mlele7582-code/make-knowledge-cards) — 知识卡片生成工具
+- 📚 [make-knowledge-cards](https://github.com/mlele7582-code/make-knowledge-cards) — 知识卡片生成工具 <a href="/projects/make-knowledge-cards/" style="color: #d6336c; text-decoration: none;" title="查看项目总结">💗</a>
