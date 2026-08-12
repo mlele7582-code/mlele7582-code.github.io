@@ -137,30 +137,45 @@ a:hover {
 
 /* ---------- Inline Code ---------- */
 .glass code {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #ffb3c6 !important;
-  padding: 0.15em 0.45em;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #f0f0ff !important;
+  padding: 0.15em 0.5em;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 0.9em;
 }
 
-/* ---------- Code Blocks ---------- */
+/* ---------- Code Block Container ---------- */
 .glass pre {
-  background: rgba(0, 0, 0, 0.35) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 14px;
   padding: 1.2rem 1.4rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  margin: 0.5rem 0 1.5rem;
+  overflow-x: auto;
 }
 .glass pre code {
   background: none !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
   padding: 0;
   border: none;
   font-size: 0.88rem;
-  line-height: 1.7;
+  line-height: 1.75;
+}
+
+/* ---------- Language Label (inserted by JS) ---------- */
+.code-lang-label {
+  display: inline-block;
+  padding: 3px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-bottom: 0.55rem;
 }
 
 /* ---------- Tables ---------- */
@@ -219,6 +234,124 @@ a:hover {
 /* ---------- Hide Cayman defaults ---------- */
 .page-header { display: none !important; }
 .site-footer { display: none !important; }
+
+/* ============================================
+   Rouge Syntax Highlight — 深色主题覆盖
+   覆盖 Cayman 浅色高亮，匹配毛玻璃风格
+   ============================================ */
+
+/* 容器背景透明化 */
+.highlight {
+  background: transparent !important;
+}
+
+/* ---- 注释 Comment ---- */
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cd,
+.highlight .cs,
+.highlight .cp {
+  color: #8b949e !important;
+  font-style: italic !important;
+}
+
+/* ---- 错误 Error ---- */
+.highlight .err {
+  color: #ff7b72 !important;
+  background-color: transparent !important;
+}
+
+/* ---- 关键字 Keyword ---- */
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .kv {
+  color: #ff7b72 !important;
+  font-weight: bold !important;
+}
+
+/* ---- 字符串 String ---- */
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sr,
+.highlight .ss,
+.highlight .sx {
+  color: #a5d6ff !important;
+}
+
+/* ---- 数字 Number ---- */
+.highlight .m,
+.highlight .mb,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .mx,
+.highlight .il {
+  color: #79c0ff !important;
+}
+
+/* ---- 名称 Name (函数/实体/标签) ---- */
+.highlight .na,
+.highlight .nc,
+.highlight .nd,
+.highlight .ne,
+.highlight .nf,
+.highlight .ni,
+.highlight .nl,
+.highlight .nn,
+.highlight .no,
+.highlight .nt,
+.highlight .nv {
+  color: #d2a8ff !important;
+}
+
+/* ---- 内置 Builtin ---- */
+.highlight .nb,
+.highlight .bp {
+  color: #ffa657 !important;
+}
+
+/* ---- 变量 Variable ---- */
+.highlight .vc,
+.highlight .vg,
+.highlight .vi {
+  color: #ffa657 !important;
+}
+
+/* ---- 操作符 Operator ---- */
+.highlight .o,
+.highlight .ow {
+  color: #ff7b72 !important;
+}
+
+/* ---- 泛型 Generic (diff) ---- */
+.highlight .gd { color: #ff7b72 !important; background-color: rgba(255, 123, 114, 0.15) !important; }
+.highlight .gi { color: #7ee787 !important; background-color: rgba(126, 231, 135, 0.15) !important; }
+.highlight .ge { color: #ff7b72 !important; font-style: italic !important; }
+.highlight .gs { font-weight: bold !important; }
+.highlight .gu { color: #8b949e !important; }
+.highlight .gt { color: #ff7b72 !important; }
+.highlight .gh { color: #8b949e !important; }
+.highlight .go { color: #6e7681 !important; }
+.highlight .gp { color: #8b949e !important; }
+.highlight .gr { color: #ff7b72 !important; }
+
+/* ---- 空白 Whitespace ---- */
+.highlight .w {
+  color: #484f58 !important;
+}
 
 /* =========== Responsive =========== */
 @media (max-width: 768px) {

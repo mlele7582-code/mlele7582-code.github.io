@@ -213,6 +213,36 @@
           }
         });
       }
+      // 新增：为代码块注入 <span> 语言标签（不用 ::before，避免复制时多出文字）
+      document.querySelectorAll('.glass pre').forEach(function(pre) {
+        // 跳过已有标签的
+        if (pre.parentElement.querySelector('.code-lang-label')) return;
+
+        var lang = '';
+        // 方式1：从 Rouge 外层 wrapper 取（如 <div class="language-bash highlighter-rouge">）
+        var wrapper = pre.closest('div[class*="language-"]');
+        if (wrapper) {
+          wrapper.className.split(/\s+/).forEach(function(c) {
+            if (c.indexOf('language-') === 0) lang = c.replace('language-', '');
+          });
+        }
+        // 方式2：从 <code class="language-xxx"> 取
+        if (!lang) {
+          var code = pre.querySelector('code[class*="language-"]');
+          if (code) {
+            code.className.split(/\s+/).forEach(function(c) {
+              if (c.indexOf('language-') === 0) lang = c.replace('language-', '');
+            });
+          }
+        }
+
+        if (lang && lang !== 'plaintext') {
+          var label = document.createElement('span');
+          label.className = 'code-lang-label';
+          label.textContent = lang;
+          pre.parentElement.insertBefore(label, pre);
+        }
+      });
     })();
   </script>
 </body>
